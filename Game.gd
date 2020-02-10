@@ -11,15 +11,17 @@ func _ready():
     for x in 4:
       row.append(null)
     tiles.append(row)
-  var x = rand_range(0, 3)
-  var y = rand_range(0, 4)
+  randomize()
+  var x = randi() % 4
+  var y = randi() % 4
   create_tile(x, y)
 
 func create_tile(x : int, y : int):
   var tile = get_node("Tile").duplicate()
   print(tile)
-  tile.position.y = y * 200
-  tile.position.x = x * 200
+  tile.position.y = y * 268 + 138
+  tile.position.x = x * 268 + 138
+  tile.show()
   add_child(tile)
   tiles[y][x] = tile
 

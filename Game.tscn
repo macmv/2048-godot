@@ -1,45 +1,58 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://assets/background.png" type="Texture" id=2]
+[ext_resource path="res://assets/background-grid.png" type="Texture" id=3]
 
-[sub_resource type="Shader" id=2]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 uniform int number;
 
 void fragment() {
+  vec4 background;
   if (number == 2) {
-    COLOR = vec4(0.93, 0.89, 0.85, 1.0);
+    background = vec4(0.93, 0.89, 0.85, 1.0);
   } else if (number == 4) {
-    COLOR = vec4(0.93, 0.88, 0.78, 1.0);
+    background = vec4(0.93, 0.88, 0.78, 1.0);
   } else if (number == 8) {
-    COLOR = vec4(0.95, 0.69, 0.47, 1.0);
+    background = vec4(0.95, 0.69, 0.47, 1.0);
   } else if (number == 16) {
-    COLOR = vec4(0.96, 0.58, 0.39, 1.0);
+    background = vec4(0.96, 0.58, 0.39, 1.0);
   } else if (number == 32) {
-    COLOR = vec4(0.96, 0.48, 0.37, 1.0);
+    background = vec4(0.96, 0.48, 0.37, 1.0);
   } else if (number == 64) {
-    COLOR = vec4(0.96, 0.37, 0.23, 1.0);
+    background = vec4(0.96, 0.37, 0.23, 1.0);
   } else if (number == 128) {
-    COLOR = vec4(0.93, 0.81, 0.45, 1.0);
+    background = vec4(0.93, 0.81, 0.45, 1.0);
   } else if (number == 256) {
-    COLOR = vec4(0.93, 0.8, 0.38, 1.0);
+    background = vec4(0.93, 0.8, 0.38, 1.0);
   } else if (number == 512) {
-    COLOR = vec4(0.93, 0.78, 0.31, 1.0);
+    background = vec4(0.93, 0.78, 0.31, 1.0);
   } else if (number == 1024) {
-    COLOR = vec4(0.93, 0.77, 0.25, 1.0);
+    background = vec4(0.93, 0.77, 0.25, 1.0);
   } else if (number == 2048) {
-    COLOR = vec4(0.93, 0.76, 0.18, 1.0);
+    background = vec4(0.93, 0.76, 0.18, 1.0);
+  } else if (number == 4096) {
+    background = vec4(0.24, 0.22, 0.2, 1.0);
   }
+  COLOR = background;
 }"
 
-[sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 2 )
-shader_param/number = null
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/number = 2
 
-[sub_resource type="ImageTexture" id=1]
+[sub_resource type="ImageTexture" id=3]
 size = Vector2( 270, 270 )
+
+[sub_resource type="DynamicFontData" id=4]
+font_path = "res://assets/Hack-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=5]
+size = 255
+use_filter = true
+font_data = SubResource( 4 )
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -48,7 +61,24 @@ script = ExtResource( 1 )
 position = Vector2( 540, 540 )
 texture = ExtResource( 2 )
 
+[node name="Grid" type="Sprite" parent="Background"]
+z_index = 1
+texture = ExtResource( 3 )
+
 [node name="Tile" type="Sprite" parent="."]
-material = SubResource( 3 )
-position = Vector2( 511.603, 494.022 )
-texture = SubResource( 1 )
+visible = false
+material = SubResource( 2 )
+position = Vector2( 138, 138 )
+texture = SubResource( 3 )
+
+[node name="Number" type="Label" parent="Tile"]
+margin_left = -77.0
+margin_top = -140.0
+margin_right = 77.0
+margin_bottom = 160.0
+size_flags_vertical = 2
+size_flags_stretch_ratio = 0.0
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0.564706, 0.564706, 0.564706, 1 )
+text = "2"
