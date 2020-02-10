@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Game.gd" type="Script" id=1]
+[ext_resource path="res://assets/background.png" type="Texture" id=2]
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform int number;
+
+void fragment() {
+  if (number == 2) {
+    COLOR = vec4(0.93, 0.89, 0.85, 1.0);
+  } else if (number == 4) {
+    COLOR = vec4(0.93, 0.88, 0.78, 1.0);
+  } else if (number == 8) {
+    COLOR = vec4(0.95, 0.69, 0.47, 1.0);
+  } else if (number == 16) {
+    COLOR = vec4(0.96, 0.58, 0.39, 1.0);
+  } else if (number == 32) {
+    COLOR = vec4(0.96, 0.48, 0.37, 1.0);
+  } else if (number == 64) {
+    COLOR = vec4(0.96, 0.37, 0.23, 1.0);
+  } else if (number == 128) {
+    COLOR = vec4(0.93, 0.81, 0.45, 1.0);
+  } else if (number == 256) {
+    COLOR = vec4(0.93, 0.8, 0.38, 1.0);
+  } else if (number == 512) {
+    COLOR = vec4(0.93, 0.78, 0.31, 1.0);
+  } else if (number == 1024) {
+    COLOR = vec4(0.93, 0.77, 0.25, 1.0);
+  } else if (number == 2048) {
+    COLOR = vec4(0.93, 0.76, 0.18, 1.0);
+  }
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+shader_param/number = null
+
+[sub_resource type="ImageTexture" id=1]
+size = Vector2( 270, 270 )
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 540, 540 )
+texture = ExtResource( 2 )
+
+[node name="Tile" type="Sprite" parent="."]
+material = SubResource( 3 )
+position = Vector2( 511.603, 494.022 )
+texture = SubResource( 1 )
