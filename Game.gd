@@ -27,6 +27,9 @@ func create_tile(x : int, y : int):
 
 func update_board(x, y):
   print("Sliding board " + str(x) + ", " + str(y))
+  x = randi() % 4
+  y = randi() % 4
+  create_tile(x, y)
 
 func _unhandled_input(event):
   if event.is_action_pressed("click"):
