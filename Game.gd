@@ -21,7 +21,7 @@ func _ready():
 
 func create_tile(x : int, y : int):
   var tile = get_node("Tile").duplicate()
-  print(tile)
+  tile.material = tile.material.duplicate(false)
   tile.set_pos(x, y)
   tile.show()
   add_child(tile)

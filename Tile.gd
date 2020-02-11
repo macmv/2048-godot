@@ -16,8 +16,8 @@ func get_number():
 
 func double():
   number *= 2
-  print("DOUBLE")
   get_node("Number").text = str(number)
+  material.set_shader_param("number", number)
 
 func set_pos(x, y):
   self.position.y = y * 268 + 138
