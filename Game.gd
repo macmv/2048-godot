@@ -54,12 +54,23 @@ func update_board(dir):
       tiles[y][x] = col_items[col]
       col_items[col].enable()
       col_items[col].set_pos(x, y)
-  while true:
-    x = randi() % 4
-    y = randi() % 4
-    if tiles[y][x] == null:
-      create_tile(x, y)
+  var filled = true
+  for row in tiles:
+    for item in row:
+      if item == null:
+        filled = false
+        break
+    if !filled:
       break
+  if filled:
+    get_node("Game Over").show()
+  else:
+    while true:
+      x = randi() % 4
+      y = randi() % 4
+      if tiles[y][x] == null:
+        create_tile(x, y)
+        break
 
 func calc_pos(row, col, dir):
   if dir == "up":
