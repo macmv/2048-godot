@@ -42,18 +42,21 @@ func update_board(dir):
         if len(col_items) > 0 and col_items[-1].get_number() == tile.get_number() && col_items[-1].enabled():
           col_items[-1].double()
           col_items[-1].disable()
-          tile.queue_free()
-          remove_child(tile)
-        else:
-          col_items.append(tile)
+          tile.destroy()
+        col_items.append(tile)
       tiles[y][x] = null
-    for col in len(col_items):
+    var col = 0
+    for i in len(col_items):
+      if col_items[i].needs_die:
+        col -= 1
       var coords = calc_pos(row, col, dir)
       x = coords[0]
       y = coords[1]
-      tiles[y][x] = col_items[col]
-      col_items[col].enable()
-      col_items[col].set_pos(x, y)
+      if !col_items[i].needs_die:
+        tiles[y][x] = col_items[i]
+      col_items[i].enable()
+      col_items[i].set_pos(x, y)
+      col += 1
   var filled = true
   for row in tiles:
     for item in row:
