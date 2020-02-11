@@ -19,6 +19,13 @@ config/name="2048"
 run/main_scene="res://Game.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=1080
+window/size/height=1920
+window/size/resizable=false
+window/handheld/orientation="portrait"
+
 [input]
 
 click={
